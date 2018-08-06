@@ -2,7 +2,7 @@
 - name: Unregister hosts from RHSM
   hosts: all:!sat-server.beniaris.com
   tasks:
-  	- name: run the command to unregister the system
-	    command: 'subscription-manager --unregister'
-  	- name: run the command to clean the local data
-	    command: 'subscription-manager --clean'
+    - name: run the command to unregister the system
+      command: 'subscription-manager --unregister'
+    - name: run the command to clean the local data
+      command: 'subscription-manager --clean'
