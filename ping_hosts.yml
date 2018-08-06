@@ -1,0 +1,6 @@
+---
+- name: This is a simple utility to ping hosts
+  hosts: all
+  tasks:
+    - name: ping module
+      ping:
