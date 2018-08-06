@@ -1,6 +1,6 @@
 ---
 - name: Simple Utility to Clear the SSSD Cache
-  hosts: "{{ idm_hosts }}"
+  hosts: all
   tasks:
     - name: stop the sssd service
       service:
