@@ -1,6 +1,6 @@
 ---
 - name: This is a simple utility to ping hosts
-  hosts: all
+  hosts: infservers
   tasks:
     - name: ping module
       ping:
