@@ -1,5 +1,5 @@
 ---
-- name: This is a simple utility to ping hosts
+- name: Run the Ansible Ping module on a host
   hosts: all
   tasks:
     - name: ping module
