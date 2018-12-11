@@ -1,6 +1,6 @@
 ---
 - name: This is a simple utility to ping hosts
-  hosts: "{{ idm_hosts }}"
+  hosts: all
   tasks:
     - name: ping module
       ping:
