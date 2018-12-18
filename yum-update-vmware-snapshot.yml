@@ -7,7 +7,7 @@
 #    3.  Reboot RHEL Guest
 #    4.  Wait for reboot to complete
 #
-- name: Patch an Aon RHEL vmware guest
+- name: Patch an RHEL vmware guest
   hosts: rhel-guests
   remote_user: ansibleop
   become: yes
@@ -20,12 +20,12 @@
         hostname: "{{ inventory_hostname }}"
         username: "{{ vcenter_svc_user }}"
         password: "{{ vcenter_svc_pw }}"
-        datacenter: AonDC
+        datacenter: DC
         folder: /myfolder
         name: "{{ inventory_hostname }}"
         state: present
         quiesce: true
-        snapshot_name: Aon-Q4-Patch-Snap
+        snapshot_name: 2018Q4-Patch-Snapshot
         description: "Snapshot for Q4 Patching"
       delegate_to: localhost
 
