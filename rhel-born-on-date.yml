@@ -1,0 +1,12 @@
+---
+#  Get the RHEL born on date
+#
+- name: View RHEL born on date
+  hosts: all
+  remote_user: ansibleop
+  become: yes
+
+  tasks:
+    - name: View the RHEL born on date
+      shell:  "rpm -qi basesystem | grep '^Install Date'"
+...
