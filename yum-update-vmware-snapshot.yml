@@ -57,5 +57,4 @@
 
     - name: Invoke Ping module on the host to verify that it is up
       ping:
-
 ...
