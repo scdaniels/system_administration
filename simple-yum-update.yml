@@ -1,0 +1,25 @@
+---
+#  Example patching a RHEL VM Guest at Aon
+#
+#  Outline:
+#    1.  Issue snapshot on VMware infrastructure
+#    2.  Patch RHEL Guest
+#    3.  Reboot RHEL Guest
+#    4.  Wait for reboot to complete
+#
+- name: Update all available packages with yum
+  hosts: all
+  remote_user: ansibleop
+  become: yes
+
+  tasks:
+    - name: Install the latest patches allowed by the Content View
+      yum:
+        name: '*'
+        state: latest
+      register: yum_update
+
+    - name: Invoke Ping module on the host to verify that it is up
+      ping:
+
+...

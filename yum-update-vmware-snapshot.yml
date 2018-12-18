@@ -1,0 +1,61 @@
+---
+#  Example patching a RHEL VM Guest at Aon
+#
+#  Outline:
+#    1.  Issue snapshot on VMware infrastructure
+#    2.  Patch RHEL Guest
+#    3.  Reboot RHEL Guest
+#    4.  Wait for reboot to complete
+#
+- name: Patch an Aon RHEL vmware guest
+  hosts: rhel-guests
+  remote_user: ansibleop
+  become: yes
+  vars_files:
+    - vars/secret.yml
+
+  tasks:
+    - name: Quiesce and take a snapshot
+      vmware_guest_snapshot:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ vcenter_svc_user }}"
+        password: "{{ vcenter_svc_pw }}"
+        datacenter: AonDC
+        folder: /myfolder
+        name: "{{ inventory_hostname }}"
+        state: present
+        quiesce: true
+        snapshot_name: Aon-Q4-Patch-Snap
+        description: "Snapshot for Q4 Patching"
+      delegate_to: localhost
+
+    - name: Install the latest patches allowed by the Content View
+      yum:
+        name: '*'
+        state: latest
+        # exclude: kernel*
+      register: yum_update
+
+    - name: Restart the system
+      shell: sleep 2 && shutdown -r now "Reboot post patching via Ansible"
+      # command: shutdown -r now "Reboot post patching via Ansible"
+      async: 1
+      poll: 0
+      ignore_errors: true
+      when: yum_update.changed
+
+    - name: Wait for the server to restart
+      wait_for:
+        host: "{{ inventory_hostname }}"
+        port: 22
+        state: started
+        delay: 25
+        timeout: 200
+      become: false
+      delegate_to: localhost
+      when: yum_update.changed
+
+    - name: Invoke Ping module on the host to verify that it is up
+      ping:
+
+...
