@@ -1,5 +1,5 @@
 ---
-#  Example patching a RHEL VM Guest at Aon
+#  Example patching a RHEL VM Guest on vmware
 #
 #  Outline:
 #    1.  Issue snapshot on VMware infrastructure
