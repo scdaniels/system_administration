@@ -1,11 +1,9 @@
 ---
-#  Example patching a RHEL VM Guest at Aon
+#  Example patching a RHEL VM Guest
 #
 #  Outline:
-#    1.  Issue snapshot on VMware infrastructure
-#    2.  Patch RHEL Guest
-#    3.  Reboot RHEL Guest
-#    4.  Wait for reboot to complete
+#    1.  Patch RHEL Guest
+#    2.  Run the ping module to check if alive
 #
 - name: Update all available packages with yum
   hosts: all
