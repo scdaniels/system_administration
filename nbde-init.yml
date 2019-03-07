@@ -1,0 +1,29 @@
+---
+#  Example of configuring NBDE after an initial Satellite build
+#
+#  Outline:
+#    1.  Install the clevis packages if they are not already installed.
+#        My default provisioning template will automatically put these
+#        in place, but verify most up-to-date is in place.
+#    2.  Update the defalt encryption key to a vault protected key
+#
+- name: Update NBDE configuration from the build passphrase to a secure passprhase
+
+  hosts: all
+  remote_user: ansibleop
+  become: yes
+
+  tasks:
+    - name: Update or Install the latest clevis packages
+      yum:
+        name:
+          - clevis
+          - clevis-luks
+          - clevis-dracut
+        state: latest
+      register: yum_update
+
+    - name: Update the LUKS password on the Tang server(s)
+      ping:
+
+...
