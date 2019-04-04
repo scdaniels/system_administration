@@ -1,0 +1,20 @@
+---
+#  Example of setting the timezone
+#
+#  Outline:
+#    1.  Build a new system via Kickstart.  I don't set the timezone in my kickstarts,
+#        do all the boxes come in UTC
+#    2.  Use the timezone module to set the TZ to America/Chicago
+#
+- name: Update NBDE configuration from the build passphrase to a secure passprhase
+
+  hosts: all
+  remote_user: ansibleop
+  become: yes
+
+  tasks:
+    - name: Set the default timezone to America/Chicago
+      timezone:
+        name:  "America/Chicago"
+
+...
