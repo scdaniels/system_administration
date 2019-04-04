@@ -16,5 +16,4 @@
     - name: Set the default timezone to America/Chicago
       timezone:
         name:  "America/Chicago"
-
 ...
