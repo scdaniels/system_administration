@@ -6,7 +6,7 @@
 #        do all the boxes come in UTC
 #    2.  Use the timezone module to set the TZ to America/Chicago
 #
-- name: Set the timezone to America/Chicago after the build
+- name: Set the timezone to America/Chicago
 
   hosts: all
   remote_user: ansibleop
