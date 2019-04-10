@@ -6,7 +6,7 @@
 #        do all the boxes come in UTC
 #    2.  Use the timezone module to set the TZ to America/Chicago
 #
-- name: Update NBDE configuration from the build passphrase to a secure passprhase
+- name: Set the timezone to America/Chicago after the build
 
   hosts: all
   remote_user: ansibleop
