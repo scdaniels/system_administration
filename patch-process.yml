@@ -1,0 +1,52 @@
+---
+#  Example patching a process
+#
+#  Outline:
+#    1. 
+#
+- name: Patch process for RHEL
+  hosts: all
+  remote_user: ansibleop
+  become: yes
+
+  tasks:
+
+    - name: Update the Change Order
+      debug:
+        msg: Updating the Change Order to flag host update
+
+    - name: Perform Backup or Snapshot
+      debug:
+        msg: Initiating backup/snapshot
+
+    - name: Disable Monitoring of systemd
+      debug:
+        msg:  Disable alerts for system during the patch process
+
+    - name: Install the latest patches allowed by the Content View
+      yum:
+        name: '*'
+        state: latest
+        # exclude: kernel*
+      register: yum_update
+
+    - name: Restart the system
+      reboot:
+        msg: Automated reboot initiated via Ansible Tower automation
+        post_reboot_delay: 25
+        reboot_timeout: 200      
+      when: yum_update.changed
+
+    - name: Post reboot install of emacs
+      yum:
+        name: emacs
+        state: latest
+
+    - name: Enable Monitoring of system
+      debug:
+        msg:  Enable monitoring
+
+    - name: Close Change Order
+      debug:
+        msg:  Add logs to change order and close it
+...
