@@ -19,7 +19,7 @@
       debug:
         msg: Initiating backup/snapshot
 
-    - name: Disable Monitoring of systemd
+    - name: Disable Monitoring of system
       debug:
         msg:  Disable alerts for system during the patch process
 
