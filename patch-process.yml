@@ -37,10 +37,16 @@
         reboot_timeout: 200      
       when: yum_update.changed
 
-    - name: Post reboot install the kpatch utils
+    - name: Install the kpatch RPM
       yum:
         name: kpatch
         state: latest
+
+    - name: Start the kpatch.service
+      service:
+        name: kpatch.service
+        enabled: yes
+        state: started
 
     - name: Enable Monitoring of system
       debug:
