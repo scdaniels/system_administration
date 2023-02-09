@@ -1,6 +1,7 @@
 ---
 - name: Run the Ansible Ping module on a host
   hosts: all
+  gather_facts: false
   tasks:
     - name: ping module
       ping:
