@@ -10,6 +10,7 @@
     - name: Query the RHEL born on date
       shell:  "rpm -qi basesystem | grep '^Install Date'"
       register: bornOnDate
+      changed_when: false
       
     - name: Display the born on date
       debug:
