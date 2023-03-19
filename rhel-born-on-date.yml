@@ -7,6 +7,12 @@
   become: yes
 
   tasks:
-    - name: View the RHEL born on date
+    - name: Query the RHEL born on date
       shell:  "rpm -qi basesystem | grep '^Install Date'"
+      register: bornOnDate
+      
+    - name: Display the born on date
+      debug:
+        var: bornOnDate.stdout
+      
 ...
