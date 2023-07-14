@@ -4,4 +4,8 @@
   gather_facts: false
   tasks:
     - name: ping module
-      ping:
+      ansible.builtin.ping:
+
+    - name: pause to observe pods
+      ansible.builtin.pause:
+        seconds: 6
