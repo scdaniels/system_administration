@@ -8,4 +8,4 @@
 
     - name: pause to observe pods
       ansible.builtin.pause:
-        seconds: 6
+        seconds: 60
