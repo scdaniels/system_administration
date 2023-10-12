@@ -1,0 +1,36 @@
+---
+- name: Install, Configure, and Start httpd
+  
+  hosts: webservers
+  remote_user: ansibleop
+  become: yes
+
+  tasks:
+    - name: Installing httpd package
+      ansible.builtin.yum:
+        name: httpd
+        state: latest
+
+    - name: Install Custom index.html
+      ansible.builtin.copy:
+        dest: /var/www/html/index.html
+        content: |
+          Sample web page content
+
+    # systemctl enable --now httpd
+    #
+    - name: Enable/Start httpd service
+      ansible.builtin.service:
+        name: httpd
+        enabled: true
+        state: started
+
+    # firewall-cmd --zone=public --add-service=http --permanent
+    # firewall-cmd --reload
+    #
+    - name: Open http service in Firewall
+      ansible.posix.firewalld:
+        service: http
+        state: enabled
+        immediate: true
+        permanent: true
