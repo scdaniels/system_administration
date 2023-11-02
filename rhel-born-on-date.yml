@@ -8,14 +8,12 @@
 
   tasks:
     - name: Query the RHEL born on date
-      shell:  
-        cmd: "rpm -qi basesystem | grep '^Install Date'"
+      shell: "rpm -qi basesystem | grep '^Install Date'"
       register: bornOnDate
       changed_when: false
-      warn: false
         
     - name: Display the born on date
-      ansible.builtin.debug:
+      debug:
         var: bornOnDate.stdout
       
 ...
