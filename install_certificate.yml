@@ -1,0 +1,12 @@
+#  Create and install certificates using Venafi
+#
+#  - Scott Danielson
+#
+- name: Create and Install Certificate using Venafi
+  hosts: all
+  remote_user: ansibleop
+  become: yes
+
+  tasks:
+
+  # - name: Create and install Venafi certificate

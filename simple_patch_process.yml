@@ -1,0 +1,87 @@
+---
+#  Example patching a process
+#
+#
+# We’d like to modify our current use of Ansible for OS patching.  Today, ServiceNow
+# uses the AAP API to dynamically creates an inventory collection and adds hosts for
+# that 4-hour patch window.  It then drops an Ansible playbook on the host
+# collection to trigger the appropriate OS patching command (i.e., dnf, yum, etc…).
+#
+# We need to be able to “chain” multiple maintenance activities together, each of
+# which probably has its own playbooks for execution.  For example
+# (1) run the OS patching playbook but do not reboot,
+# (2) update security agents,
+# (3) update VMWare tools or AWS SSM,
+# (4) reboot the server.
+#
+# These “chained” maintenance activities may be different for each server in the
+# patching window. For example, one server may only receive OS patches; however,
+# 10 of them may receive all updates.
+#
+# Love to hear your thoughts on ways we can accomplish it.
+#
+#
+#  Outline of Patch Process for RHEL with Lightspeed
+#    1. Update a ServiceNow ticket to indicate the start of a patch
+#    2. Take a snapshot of the VM
+#    3. Disable monitoring
+#    4. Disable services (postgres)
+#    5. Apply the patches saving output to a registered variable
+#    6. Install any new packages needed
+#    7. Reboot the system if needed
+#    8. Restart the postgresql service
+#    9. Enable the postgresql firewall port
+#    10. Re-enable monitoring
+#    11. Update the ServiceNow ticket with a message "Patching Completed"
+#
+#
+#  - Scott Danielson
+#
+- name: Patch process for RHEL
+  hosts: all
+  remote_user: ansibleop
+  become: yes
+
+  vars:
+    install_rpms:
+      - kpatch
+      - bash-completion
+      - bpftrace
+
+  tasks:
+
+  # - name: Update the change order using the ServiceNow ITSM collection indicating that patching is starting
+
+  # - name: Create a guest snapshot using the vmware_rest collection
+
+  - name: Disable Monitoring of system
+    debug:
+      msg:  Disable alerts for system during the patch process
+
+  - name: Disable the postgresql service
+
+  # - name: Disable the postgresql firewall port
+
+  # - name: Install the latest RHEL patches excluding kernel packages saving results to patch_results
+
+  # - name: Install packages defined in install_rpms variable
+
+  # Update the open-vm-tools package & update the amazon-ssm-agent pakage to the latest version
+
+  # - name: Update the amazon-ssm-agent package to the latest version
+
+  # - name: Reboot the system when patch_results shows a change
+
+
+
+  # - name: Start and Enable the postgresql service
+
+  # - name: Enable the postgresql firewall port
+
+    - name: Enable Monitoring of system
+      debug:
+        msg:  Enable alerting following patching
+
+  # - name: Update the change order using the ServiceNow ITSM collection indicating that patching is complete
+ 
+...

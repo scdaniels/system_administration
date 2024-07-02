@@ -1,0 +1,47 @@
+- name: Patch process for RHEL
+  hosts: all
+  remote_user: ansibleop
+  become: yes
+
+  vars:
+    install_rpms:
+      - kpatch
+      - bash-completion
+      - bpftrace
+
+  tasks:
+
+  # - name: Update the change order using the ServiceNow ITSM collection indicating that patching is starting
+
+  # - name: Create a guest snapshot using the vmware_rest collection
+
+  - name: Disable Monitoring of system
+    debug:
+      msg:  Disable alerts for system during the patch process
+
+  - name: Disable the postgresql service
+
+  # - name: Disable the postgresql firewall port
+
+  # - name: Install the latest RHEL patches excluding kernel packages saving results to patch_results
+
+  # - name: Install packages defined in install_rpms variable
+
+  # Update the open-vm-tools package & update the amazon-ssm-agent pakage to the latest version
+
+  # - name: Update the amazon-ssm-agent package to the latest version
+
+  # - name: Reboot the system when patch_results shows a change
+
+
+
+  # - name: Start and Enable the postgresql service
+
+  # - name: Enable the postgresql firewall port
+
+    - name: Enable Monitoring of system
+      debug:
+        msg:  Enable alerting following patching
+
+  # - name: Update the change order using the ServiceNow ITSM collection indicating that patching is complete
+ 
