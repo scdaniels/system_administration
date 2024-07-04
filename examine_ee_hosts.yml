@@ -1,0 +1,20 @@
+---
+- name: Examine EE host
+  hosts: localhost
+  # Set gather_facts to true to see if any hints of the ExecNode are specified
+  # in variables.  Otherwise, the IP address of the host system can be found
+  # in /etc/hosts under the DNS name of host.containers.internal
+  gather_facts: true
+  tasks:
+    - name: ping module
+      ansible.builtin.ping:
+
+    - name: DNS resolve the IP address for host.containers.internal
+      ansible.builtin.command: dig +short host.containers.internal
+      register: dig_result
+
+
+
+    - name: pause to observe pods
+      ansible.builtin.pause:
+        seconds: 60

@@ -5,3 +5,7 @@
   tasks:
     - name: ping module
       ansible.builtin.ping:
+
+    - name: view hostname on ExecNode delegate
+      ansible.builtin.command: /usr/bin/hostname
+      delegate_to: host.containers.internal

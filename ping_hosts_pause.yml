@@ -1,0 +1,11 @@
+---
+- name: Run the Ansible Ping module on a host and pause to observe pods/container groups
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: ping module
+      ansible.builtin.ping:
+
+    - name: pause to observe pods when running on OpenShift
+      ansible.builtin.pause:
+        seconds: 60
